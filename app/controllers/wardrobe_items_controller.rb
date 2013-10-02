@@ -13,13 +13,17 @@ class WardrobeItemsController < ApplicationController
   end
 
   def new
-    @wardrobe_item = WardrobeItem.create
+    @wardrobe_item = WardrobeItem.new
   end
 
   def create
-    @wardrobe_item = WardrobeItem.create(wardrobe_item_params)
+    @wardrobe_item = WardrobeItem.new(wardrobe_item_params)
 
-    redirect_to @wardrobe_item
+    if @wardrobe_item.save
+      redirect_to @wardrobe_item
+    else
+      render action: 'new'
+    end
   end
 
   private
